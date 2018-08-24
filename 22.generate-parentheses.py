@@ -27,6 +27,9 @@
 # ]
 # 
 #
+
+
+# use dynamic programming
 class Solution(object):
     def generateParenthesis(self, n):
         """
