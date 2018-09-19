@@ -56,17 +56,17 @@ class Solution(object):
             if nums[m] == target:
                 return True
             
-            if nums[m] > nums[r]:
+            if nums[m] > nums[l]:
                 if (nums[m] > target and nums[l] <= target):
                     r = m - 1
                 else:
                     l = m + 1
-            elif nums[m] < nums[r]:
+            elif nums[m] < nums[l]:
                 if (nums[m] < target and nums[r] >= target):
                     l = m + 1
                 else:
                     r = m - 1
             else:
-                r -= 1
+                l += 1
 
         return False
