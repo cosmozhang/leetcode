@@ -72,5 +72,3 @@ class Solution(object):
         
         return ret_ls
 
-s = Solution()
-s.restoreIpAddresses('255255255255')
