@@ -70,16 +70,12 @@ class Solution(object):
         
         left_res = True
         if node.left:
-            if node.left.val >= node.val or node.left.val <= min_v:
-                left_res = False
-            if not self.helper(node.left, node.val, min_v):
+            if node.left.val >= node.val or node.left.val <= min_v or not self.helper(node.left, node.val, min_v):
                 left_res = False
         
         right_res = True
         if node.right:
-            if node.right.val <= node.val or node.right.val >= max_v:
-                right_res = False
-            if not self.helper(node.right, max_v, node.val):
+            if node.right.val <= node.val or node.right.val >= max_v or not self.helper(node.right, max_v, node.val):
                 right_res = False
 
         if left_res and right_res:
