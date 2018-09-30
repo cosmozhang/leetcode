@@ -74,10 +74,13 @@ class Solution:
         node = dummy
         while root:
             while root:
-                node.next = root.left
-                node = node.next or node
-                node.next = root.right
-                node = node.next or node
+                if root.left:
+                    node.next = root.left
+                    node = node.next
+                if root.right:
+                    node.next = root.right
+                    node = node.next
                 root = root.next
             root= dummy.next
             node = dummy
+            node.next = None
