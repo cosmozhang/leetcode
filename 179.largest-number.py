@@ -45,7 +45,7 @@ class Solution(object):
             else:
                 return 0
             '''
-            return 1 if a+b > b+a else -1
+            return 1 if a+b >= b+a else -1
 
         str_nums = map(str, nums)
         s = ''
