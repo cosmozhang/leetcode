@@ -37,14 +37,6 @@ class Solution(object):
         """
         
         def mycmp(a, b):
-            '''
-            if a+b > b+a:
-                return 1
-            elif a+b < b+a:
-                return -1
-            else:
-                return 0
-            '''
             return 1 if a+b >= b+a else -1
 
         str_nums = map(str, nums)
