@@ -82,12 +82,13 @@ class Solution(object):
         if sum(gas) < sum(cost):
             return -1
         else:
-            best_id = 0
             min_s = float('inf')
-            for idx, _ in enumerate(zip(gas, cost)):
-                s = sum(gas[:idx])-sum(cost[:idx])
+            s = 0
+            for idx, (i, j) in enumerate(zip(gas, cost)):
+                c = i - j
+                s += c
                 if s < min_s:
                     min_s = s
-                    best_id = idx
+                    best_id = idx + 1 if idx<len(gas)-1 else 0
 
             return best_id
