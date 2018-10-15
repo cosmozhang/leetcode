@@ -57,8 +57,4 @@ class Solution(object):
                     return nums[l]
                 else:
                     return nums[r]
-'''
-if __name__ == '__main__':
-    s = Solution()
-    print s.findMin([1,2])
-'''
+
