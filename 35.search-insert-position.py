@@ -51,7 +51,25 @@ class Solution(object):
         :type target: int
         :rtype: int
         """
+        '''
         for i, v in enumerate(nums):
             if target <= nums[i]:
                 return i
         return i+1
+        '''
+
+        l = 0
+        r = len(nums)-1
+
+        while l <= r:
+            m = (l+r)/2
+            if nums[m] == target or (m==0 and nums[m]>target):
+                return m
+            elif m == len(nums) - 1:
+                return m+1
+            elif nums[m]<target and nums[m+1]>target:
+                return m+1
+            elif nums[m] < target:
+                l = m+1
+            elif nums[m] > target:
+                r = m
