@@ -42,19 +42,17 @@ class Solution(object):
         :rtype: void Do not return anything, modify nums1 in-place instead.
         """
 
-        l = 0
-        for i in range(m, m+n):
-            nums1[i] = float('inf')
-        for j in range(n):
-            item = nums2[j]
-            while item > nums1[l]:
-                l+=1
-            nums1[l+1:] = nums1[l:]
-            nums1[l] = item
-            l += 1
-        for j in range(n):
-            nums1.pop(-1)
+        idx = m + n -1
+        l = m-1
+        r = n-1
+        while l >=0 and r >=0:
+            if nums1[l] > nums2[r]:
+                nums1[idx] = nums1[l]
+                l -= 1
+            else:
+                nums1[idx] = nums2[r]
+                r -= 1
+            idx -= 1
+        if l < 0:
+            nums1[:idx+1] = nums2[:r+1]
 
-if __name__ == '__main__':
-    s = Solution()
-    s.merge([4,5,6,0,0,0], 3, [1,2,3], 3)
