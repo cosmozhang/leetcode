@@ -61,14 +61,9 @@ class Solution(object):
         :type root: TreeNode
         :rtype: bool
         """
-        if not root:
-            return True
+        return self.helper(root) >= 0
         
-        l, r = self.helper(root.left), self.helper(root.right)
-        if l >= 0 and r >= 0 and abs(l-r) < 2:
-            return True
-        else:
-            return False
+
 
         
     def helper(self, node):
