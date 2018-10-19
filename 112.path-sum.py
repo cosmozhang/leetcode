@@ -51,8 +51,8 @@ class Solution(object):
         return self.helper(root, sum)
         
     def helper(self, node, s):
-        if not node: # it is a leaf
-            if s != 0:
+        if not node.left and not node.right: # it is a leaf
+            if s != node.val:
                 return False
             else:
                 return True
