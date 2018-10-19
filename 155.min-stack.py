@@ -48,7 +48,7 @@ class MinStack(object):
         initialize your data structure here.
         """
         self.s = []
-        self.min_s = [float('inf')]
+        self.min_s = []
         
 
     def push(self, x):
@@ -57,7 +57,9 @@ class MinStack(object):
         :rtype: void
         """
         self.s.append(x)
-        if x <= self.min_s[-1]:
+        if not self.min_s:
+            self.min_s.append(x)
+        elif x <= self.min_s[-1]:
             self.min_s.append(x)
         
 
@@ -83,7 +85,7 @@ class MinStack(object):
         """
         :rtype: int
         """
-        if len(self.min_s) > 1:
+        if self.min_s:
             return self.min_s[-1]
         
         
