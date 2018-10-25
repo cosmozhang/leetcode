@@ -29,6 +29,6 @@ class Solution:
     # @return an integer
     def reverseBits(self, n):
 
-        s = bin(n)[:1:-1]
+        s = bin(n)[2:][::-1]
         i = s+'0'*(32-len(s))
         return int(i, 2)
