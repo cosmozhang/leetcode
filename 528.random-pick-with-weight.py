@@ -65,7 +65,7 @@ class Solution(object):
         """
         :rtype: int
         """
-        sample = random.randint(0, self.cum[-1]-1)
+        sample = random.randint(1, self.cum[-1])
         l = 0
         r = len(self.cum)-1
         while l + 1 < r:
@@ -75,7 +75,7 @@ class Solution(object):
             elif sample < self.cum[m]:
                 r = m
 
-        if sample < self.cum[l]:
+        if sample <= self.cum[l]:
             return l
         return r
             
