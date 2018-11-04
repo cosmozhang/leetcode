@@ -72,9 +72,10 @@ class Solution(object):
         '''
         
         for i in range(I):
-            for j in range(J):
-                if any(A[i]):
+            if any(A[i]):
+                for j in range(J):
                     for k in range(K):
-                        n_matrix[i][j] += A[i][k]*B[k][j]
+                        if B[k][j] != 0:
+                            n_matrix[i][j] += A[i][k]*B[k][j]
         
         return n_matrix
