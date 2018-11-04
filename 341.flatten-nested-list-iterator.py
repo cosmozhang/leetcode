@@ -79,7 +79,6 @@ class NestedIterator(object):
             else:
                 for nitem in item.getList()[::-1]:
                     self.s.append(nitem)
-        print self.ls
         self.idx = 0
         
     def next(self):
