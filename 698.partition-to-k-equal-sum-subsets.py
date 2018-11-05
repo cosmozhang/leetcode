@@ -62,7 +62,7 @@ class Solution(object):
 
         for i in range(k):
             num = nums[idx]
-            if num + sums[i] <= t:
+            if sums[i] + num <= t:
                 sums[i] += num
                 if self.helper(nums, sums, idx+1, t, k):
                     return True
