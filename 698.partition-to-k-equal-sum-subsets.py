@@ -48,7 +48,7 @@ class Solution(object):
 
         nums.sort(reverse = True)
 
-        if nums[0] > t:
+        if any([num > t for num in nums]):
             return False
         sums= [0 for _ in range(k)]
 
