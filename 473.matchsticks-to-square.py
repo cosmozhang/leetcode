@@ -71,7 +71,7 @@ class Solution(object):
     def helper(self, nums, sums, idx, t):
         
         if idx == len(nums):
-            return sums[0] == t and sums[1] == t and sums[2] == t and sums[3] ==t
+            return sums[0] == t and sums[1] == t and sums[2] == t
 
         for i in range(4):
             if sums[i]+nums[idx] > t:
