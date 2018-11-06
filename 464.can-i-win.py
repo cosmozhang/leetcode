@@ -59,7 +59,7 @@ class Solution(object):
         choosable = range(1, maxChoosableInteger+1)
         t = desiredTotal
 
-        if choosable[-1] >= t:
+        if any([x >= t for x in choosable]):
             return True
         if sum(choosable) < t:
             return False
