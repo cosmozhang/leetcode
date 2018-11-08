@@ -25,7 +25,8 @@ class Solution(object):
         :type nums: List[int]
         :rtype: void Do not return anything, modify nums in-place instead.
         """
-                
+
+        '''
         nums.sort()
         n = len(nums)
 
@@ -39,6 +40,15 @@ class Solution(object):
             t = nums[e]
             nums[s+1:e+1] = nums[s:e]
             nums[s] = t
-
-                
+        '''
+        n = len(nums)
+        for i in range(n):
+            if i&1 == 0:
+                if i+1 < n:
+                    if nums[i] > nums[i+1]:
+                        nums[i], nums[i+1] = nums[i+1], nums[i]
+            else:
+                if i+1 < n:
+                    if nums[i] < nums[i+1]:
+                        nums[i+1], nums[i] = nums[i], nums[i+1]
         
