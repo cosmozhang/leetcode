@@ -39,6 +39,7 @@ class Solution(object):
         :type n: int
         :rtype: bool
         """
+        '''
         nn = bin(n)
         if len(nn) == 3:
             if nn[2] == '1':
@@ -47,3 +48,7 @@ class Solution(object):
                 return False
         else:
             return sum([int(k) for k in list(nn[3:])]) == 0
+        '''
+        if n == 0:
+            return False
+        return (n & n-1) == 0
