@@ -46,7 +46,7 @@ class Solution(object):
         :type board: List[List[str]]
         :rtype: int
         """
-        
+        '''
         m, n = len(board), len(board[0])
         bc = 0
         for i in range(m):
@@ -63,4 +63,14 @@ class Solution(object):
                         board[l][j] = 'O'
                         l += 1
         return bc
-                            
+        '''
+
+        # o(1)
+        m, n = len(board), len(board[0])
+        bc = 0
+        cnt = 0
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'X' and (i==0 or board[i-1][j] != 'X') and (j == 0 or board[i][j-1] != 'X'):
+                    cnt += 1
+        return cnt
