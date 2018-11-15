@@ -44,7 +44,7 @@ class Solution(object):
             mask = mask << 1
 
         for num in nums:
-            if num & mask == 0:
+            if num & mask:
                 num1 ^= num
             else:
                 num2 ^= num
