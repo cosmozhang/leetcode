@@ -47,6 +47,7 @@ class Solution(object):
             if num & mask:
                 num1 ^= num
             else:
+                print num&mask
                 num2 ^= num
 
         return [num1, num2]
