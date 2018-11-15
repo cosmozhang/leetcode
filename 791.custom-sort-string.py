@@ -58,5 +58,5 @@ class Solution(object):
         def cus_cmp(c1, c2):
             return s_dic.get(c1, 0) - s_dic.get(c2, 0)
 
-        return ''.join(sorted(T, cmp=cus_cmp))
+        return ''.join(sorted(list(T), cmp=cus_cmp))
             
