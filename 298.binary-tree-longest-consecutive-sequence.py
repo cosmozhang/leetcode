@@ -63,8 +63,10 @@ class Solution(object):
         :type root: TreeNode
         :rtype: int
         """
+        if not root:
+            return 0
         
-        return self.helper(root, None, 0)
+        return max(1, self.helper(root.left, root, 1), self.helper(root.right, root, 1))
 
     def helper(self, node, p, res):
         if not node:
