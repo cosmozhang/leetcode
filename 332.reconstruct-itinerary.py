@@ -41,7 +41,7 @@
 # ["JFK","SFO","ATL","JFK","ATL","SFO"].
 # But it is larger in lexical order.
 # 
-# 
+# DFS, and this question needs to be reviewed.
 #
 class Solution(object):
     def findItinerary(self, tickets):
