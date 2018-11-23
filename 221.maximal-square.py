@@ -56,6 +56,6 @@ class Solution(object):
                 if matrix[i][j] == '1':
                     res_mat[i][j] = min(res_mat[i-1][j-1], res_mat[i][j-1], res_mat[i-1][j])+1
                     if res_mat[i][j]**2 > largest:
-                        largest = res_mat[i][j] **2
+                        largest = res_mat[i][j]**2
         return largest
 
