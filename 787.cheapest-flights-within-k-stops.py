@@ -56,6 +56,8 @@
 # 
 #
 class Solution(object):
+    '''
+    # DFS solution
     def findCheapestPrice(self, n, flights, src, dst, K):
         """
         :type n: int
@@ -65,6 +67,8 @@ class Solution(object):
         :type K: int
         :rtype: int
         """
+
+        
         
         graph_dic = {}
         visiting = [0 for _ in range(n)]
@@ -98,3 +102,41 @@ class Solution(object):
                 self.dfs(graph_dic, new_dst, dst, visiting, k-1, total_price + price, best_price)
                 visiting[new_dst] = 0
         return
+    '''
+
+    # BFS
+    def findCheapestPrice(self, n, flights, src, dst, K):
+
+
+
+        graph_dic = {}
+        for s, d, p in flights:
+            if s not in graph_dic:
+                graph_dic[s] = [(d, p)]
+            else:
+                graph_dic[s] += [(d, p)]
+        best_price = float('inf')
+        k = -1
+        q = [(src, 0)]
+
+        while len(q) >0 :
+            new_q = []
+            
+            for city, total_price in q:
+                if city == dst:
+                    best_price = min(total_price, best_price)
+                if city in graph_dic:
+                    for nc, price in graph_dic[city]:
+                        if total_price + price < best_price:
+                            new_q.append((nc, total_price + price))
+            k+= 1
+            if k > K:
+                break
+            q = new_q
+
+        if best_price == float('inf'):
+            return -1
+        else:
+            return best_price
+                
+        
