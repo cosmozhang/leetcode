@@ -70,16 +70,20 @@ class Solution(object):
         :rtype: List[List[int]]
         """
         ans = []
-        heap = [(0x7FFFFFFF, None, None)]
-        size1, size2 = len(nums1), len(nums2)
-        idx2 = 0
-        while len(ans) < min(k, size1 * size2):
-            if idx2 < size2:
-                sum, i, j = heap[0]
-                if nums2[idx2] + nums1[0] < sum:
-                    for idx1 in range(size1):
-                        heapq.heappush(heap, (nums1[idx1] + nums2[idx2], idx1, idx2))
-                    idx2 += 1
-            sum, i, j = heapq.heappop(heap)
-            ans.append((nums1[i], nums2[j]))
-        return ans
+        heap = [(float('inf'), None, None)]
+
+        heapq.heapify(heap)
+        
+        m, n = len(nums1), len(nums2)
+        ret_ls = []
+
+        for n1 in nums1[:k]:
+            for n2 in nums2[:k]:
+                heapq.heappush(heap, (n1+n2, n1, n2))
+
+        while k >0 and len(heap) > 1 :
+            item = heapq.heappop(heap)
+            ret_ls.append([item[1], item[2]])
+            k -= 1
+        
+        return ret_ls
