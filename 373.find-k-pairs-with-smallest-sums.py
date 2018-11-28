@@ -54,7 +54,7 @@ class Solution(object):
         ans = []
         heap = [(float('inf'), None, None)]
 
-        heapq.heapify(heap)
+        # heapq.heapify(heap)
         
         m, n = len(nums1), len(nums2)
         ret_ls = []
