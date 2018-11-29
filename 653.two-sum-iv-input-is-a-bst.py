@@ -11,39 +11,39 @@
 #
 # Given a Binary Search Tree and a target number, return true if there exist
 # two elements in the BST such that their sum is equal to the given target.
-# 
+#
 # Example 1:
-# 
-# Input: 
+#
+# Input:
 # ⁠   5
 # ⁠  / \
 # ⁠ 3   6
 # ⁠/ \   \
 # 2   4   7
-# 
+#
 # Target = 9
-# 
+#
 # Output: True
-# 
-# 
-# 
-# 
+#
+#
+#
+#
 # Example 2:
-# 
-# Input: 
+#
+# Input:
 # ⁠   5
 # ⁠  / \
 # ⁠ 3   6
 # ⁠/ \   \
 # 2   4   7
-# 
+#
 # Target = 28
-# 
+#
 # Output: False
-# 
-# 
-# 
-# 
+#
+#
+#
+#
 #
 # Definition for a binary tree node.
 # class TreeNode(object):
@@ -59,24 +59,17 @@ class Solution(object):
         :type k: int
         :rtype: bool
         """
-        if not root:
-            return False
-        
-        to_minus = []
-        q = [root]
-
-        while q:
-            nq = []
-            for n in q:
-                to_minus += [n.val]
-                if n.left:
-                    nq += [n.left]
-                if n.right:
-                    nq += [n.right]
-            q = nq
-
-        for i, v in enumerate(to_minus):
-            if k-v in to_minus[:i]+to_minus[i+1:]:
-                return True
-        return False
+        self.root = root
+        self.k = k
+        return self.findNumber(root)
+    def findNumber(self, root):
+        if not root: return False
+        node = self.root
+        n = self.k - root.val
+        if n != root.val:
+            while node:
+                if node.val == n: return True
+                if n > node.val: node = node.right
+                else: node = node.left
+        return self.findNumber(root.left) or self.findNumber(root.right)
 
