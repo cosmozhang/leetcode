@@ -11,24 +11,24 @@
 #
 # Given a string containing digits from 2-9 inclusive, return all possible
 # letter combinations that the number could represent.
-# 
+#
 # A mapping of digit to letters (just like on the telephone buttons) is given
 # below. Note that 1 does not map to any letters.
-# 
-# 
-# 
+#
+#
+#
 # Example:
-# 
-# 
+#
+#
 # Input: "23"
 # Output: ["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"].
-# 
-# 
+#
+#
 # Note:
-# 
+#
 # Although the above answer is in lexicographical order, your answer could be
 # in any order you want.
-# 
+#
 #
 class Solution(object):
     def letterCombinations(self, digits):
@@ -38,25 +38,32 @@ class Solution(object):
         """
         if len(digits) == 0:
             return []
-        
-        first = digits[0]
-        if first == '2': ab = ['a', 'b', 'c']
-        if first == '3': ab = ['d', 'e', 'f']
-        if first == '4': ab = ['g', 'h', 'i']
-        if first == '5': ab = ['j', 'k', 'l']
-        if first == '6': ab = ['m', 'n', 'o']
-        if first == '7': ab = ['p', 'q', 'r', 's']
-        if first == '8': ab = ['t', 'u', 'v']
-        if first == '9': ab = ['w', 'x', 'y', 'z']
-        
-        if len(digits[1:]) > 0:
-            new_ls =[]
-            to_con = self.letterCombinations(digits[1:])
-            for l in ab:
-                for e in to_con:
-                    new_ls.append(l+e)
-            return new_ls
-        else:
-            return ab
-                    
-                
+
+        d2l_dic = {}
+        d2l_dic['2'] = ['a', 'b', 'c']
+        d2l_dic['3'] = ['d', 'e', 'f']
+        d2l_dic['4'] = ['g', 'h', 'i']
+        d2l_dic['5'] = ['j', 'k', 'l']
+        d2l_dic['6'] = ['m', 'n', 'o']
+        d2l_dic['7'] = ['p', 'q', 'r', 's']
+        d2l_dic['8'] = ['t', 'u', 'v']
+        d2l_dic['9'] = ['w', 'x', 'y', 'z']
+
+        ret_ls = self.helper(digits, d2l_dic)
+        return ret_ls
+
+    def helper(self, digits, d2l_dic):
+        if len(digits) == 0:
+            return ['']
+
+        letters = d2l_dic[digits[0]]
+        temps = self.helper(digits[1:], d2l_dic)
+
+        new_ls = []
+        for l in letters:
+            for s in temps:
+                new_ls.append(l+s)
+
+        return new_ls
+
+
