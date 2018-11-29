@@ -60,16 +60,22 @@ class Solution(object):
         :rtype: bool
         """
         self.root = root
-        self.k = k
-        return self.findNumber(root)
-    def findNumber(self, root):
-        if not root: return False
-        node = self.root
-        n = self.k - root.val
-        if n != root.val:
-            while node:
-                if node.val == n: return True
-                if n > node.val: node = node.right
-                else: node = node.left
-        return self.findNumber(root.left) or self.findNumber(root.right)
+        return self.helper(root, k)
+
+    def helper(self, node, k):
+
+        if not node:
+            return False
+
+        m = k - node.val
+        if m != node.val:
+            n = self.root
+            while n:
+                if m == n.val:
+                    return True
+                elif m < n.val:
+                    n = n.left
+                else:
+                    n = n.right
+        return self.helper(node.left, k) or self.helper(node.right, k)
 
