@@ -33,6 +33,9 @@
 # Note: 
 # You may assume k is always valid, 1 ≤ k ≤ n2.
 #
+
+# terminate while loop only when low == high
+# the numbers in the matrix are integers 
 class Solution(object):
     def kthSmallest(self, matrix, k):
         """
@@ -41,32 +44,42 @@ class Solution(object):
         :rtype: int
         """
         
-        n = len(matrix)
+        if len(matrix) == 0 or len(matrix[0]) == 0:
+           return None
 
-        low, high = matrix[0][0], matrix[n-1][n-1]
+        m, n = len(matrix), len(matrix[0])
 
-        while low <= high:
-            mid = (low+high) >> 1
-            cand_k = self.helper(matrix, n, mid)
-            if cand_k < k:
-                low = mid + 1
-            elif cand_k >= k:
-                high = mid - 1
+        l = matrix[0][0]
+        r = matrix[m-1][n-1]
 
-        return low
+        while l < r:
+            m = (l+r)/2
+            c_k = 0
+            for row in matrix:
+                if m >= row[-1]:
+                    c_k += n
+                elif m < row[0]:
+                    break
+                else:
+                    r_k = self.bsearch(m, row)
+                    c_k += r_k
 
-
-    def helper(self, matrix, n, v):
-
-        c = 0
-        r = n-1
-        cnt_k = 0
-        while c < n and r > -1:
-            if matrix[r][c] <= v:
-                c += 1
-                cnt_k += (r+1)
+            if c_k < k:
+                l = m+1
             else:
-                r -= 1
+                r = m
+                   
+        return l
 
-        return cnt_k
-        
+    def bsearch(self, num, row):
+
+        l = 0
+        r = len(row) - 1
+        while l < r:
+            m = (l+r)/2
+            if row[m] <= num:
+                l = m+1
+            else:
+                r = m
+
+        return l
