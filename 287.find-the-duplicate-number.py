@@ -35,7 +35,7 @@
 # There is only one duplicate number in the array, but it could be repeated
 # more than once.
 # 
-# 
+# Pigeon Hole, Binary Search 
 #
 class Solution(object):
     def findDuplicate(self, nums):
@@ -43,18 +43,21 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        n = len(nums) - 1
 
         l = 1
+        n = len(nums) - 1
         r = n
+
         while l < r:
-            m = (l+r) >> 1
-            cnt = 0
+            m = (l+r)/2
+
+            cnt= 0
             for num in nums:
                 if num <= m:
                     cnt += 1
-            if cnt > m:
-                r = m
+            if cnt <= m:
+                l = m+1
             else:
-                l = m + 1
+                r = m
+
         return l
