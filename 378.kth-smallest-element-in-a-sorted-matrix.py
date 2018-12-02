@@ -72,14 +72,16 @@ class Solution(object):
         return l
 
     def bsearch(self, num, row):
-
+        # calculte nums in a row smaller or equal to num
+        # l, r are indies, so need to return indies + 1
         l = 0
         r = len(row) - 1
         while l < r:
             m = (l+r)/2
-            if row[m] <= num:
+            if row[m] <= num: # two consecutive numbers are the same
                 l = m+1
             else:
                 r = m
+
 
         return l
