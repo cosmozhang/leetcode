@@ -38,6 +38,8 @@ class Solution(object):
         :type intervals: List[Interval]
         :rtype: int
         """
+
+        '''
         if not intervals:
             return 0
         
@@ -52,3 +54,38 @@ class Solution(object):
             else:
                 end_idx += 1
         return max_room_num
+        '''
+        if len(intervals) == 0:
+            return 0
+        
+        tmp_ls = []
+
+        for interv in intervals:
+            tmp_ls.append((interv.start, 's'))
+            tmp_ls.append((interv.end, 'e'))
+
+        def cus_cmp(a, b):
+            if a[0] < b[0]:
+                return -1
+            elif a[0] > b[0]:
+                return 1
+            else:
+                if a[1] == 'e' and b[1] == 's':
+                    return -1
+                elif a[1] == 's' and b[1] == 'e':
+                    return 1
+                else:
+                    return 0
+            
+        s_tmp_ls = sorted(tmp_ls, cmp = cus_cmp)
+
+        max_rooms = 0
+        rooms = 0
+        for ts in s_tmp_ls:
+            if ts[1] == 's':
+                rooms += 1
+            elif ts[1] == 'e':
+                rooms -= 1
+            max_rooms = max(max_rooms, rooms)
+
+        return max_rooms
