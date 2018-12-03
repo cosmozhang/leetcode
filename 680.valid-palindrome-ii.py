@@ -42,6 +42,7 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+        '''
         if len(s) == 0:
             return True
         
@@ -58,6 +59,32 @@ class Solution(object):
                     return False
             l+=1
             r-=1
+
+        return True
+        '''
+
+        l = 0
+        r = len(s) -1
+        while l < r:
+
+            if s[l] ==s[r]:
+                l += 1
+                r -= 1
+            else:
+                if self.helper(l+1, r, s) or self.helper(l, r-1, s):
+                    return True
+                else:
+                    return False
+
+        return True
+    
+    def helper(self, l, r, s):
+
+        while l <= r:
+            if s[l] != s[r]:
+                return False
+            l += 1
+            r -= 1
 
         return True
         
