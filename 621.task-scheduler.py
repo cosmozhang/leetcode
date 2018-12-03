@@ -48,7 +48,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        
+        '''
         task_dic = {}
         for j in tasks:
             if j not in task_dic:
@@ -66,3 +66,37 @@ class Solution(object):
             else:
                 break
         return max((v_max-1)*(n+1)+c, sum([v for k, v in sorted_task_dic]))
+        '''
+        
+        t2n_dic = {}
+
+        for t in tasks:
+            if t in t2n_dic:
+                t2n_dic[t] += 1
+            else:
+                t2n_dic[t] = 1
+
+        to_sort = []
+        for k, v in t2n_dic.iteritems():
+            to_sort.append([k, v])
+        sorted_t2n = sorted(to_sort, key=lambda x: x[1], reverse = True)
+
+        maj_tsk = sorted_t2n[0]
+        poten_idle = (maj_tsk[1] - 1) * n
+
+        s = 0
+        carry = 0
+        for item in sorted_t2n[1:]:
+            if item[1] < maj_tsk[1]:
+                s += item[1]
+            else:
+                carry += 1
+                s+= item[1]-1
+
+        if s <= poten_idle:
+            return maj_tsk[1] + poten_idle + carry
+        else:
+            return s + maj_tsk[1] + carry
+
+                
+            
