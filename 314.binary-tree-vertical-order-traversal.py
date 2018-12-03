@@ -99,12 +99,13 @@
 #         self.right = None
 
 class Solution(object):
+    '''
     def verticalOrder(self, root):
         """
         :type root: TreeNode
         :rtype: List[List[int]]
         """
-        
+
         c_dic = {}
 
         self.helper(root, 0, 0, c_dic)
@@ -126,3 +127,35 @@ class Solution(object):
 
             self.helper(node.left, c-1, l+1, c_dic)
             self.helper(node.right, c+1, l+1, c_dic)
+    '''
+    
+    def verticalOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+
+        if not root:
+            return []
+
+        column_dic = {}
+        q = [(root, 0)]
+        while len(q) > 0:
+            newq = []
+            for nodet in q:
+                node = nodet[0]
+                column = nodet[1]
+                if column not in column_dic:
+                    column_dic[column] = [node.val]
+                else:
+                    column_dic[column].append(node.val)
+
+                if node.left:
+                    newq.append((node.left, column - 1))
+                if node.right:
+                    newq.append((node.right, column + 1))
+            q = newq
+
+        s_list = sorted(column_dic.iteritems(), key = lambda x: x[0])
+
+        return [s[1] for s in s_list]
