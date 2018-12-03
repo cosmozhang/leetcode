@@ -35,6 +35,7 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+        '''
         s = 0
         sum_idx_dic = {0:1}
         cnt = 0
@@ -50,4 +51,22 @@ class Solution(object):
                 sum_idx_dic[s] += 1
 
         return cnt
+        '''
+
         
+        
+        s = 0
+        cnt = 0
+        sum2times = {0:1}
+
+        for num in nums:
+            s += num
+            if s-k in sum2times:
+                cnt += sum2times[s-k]
+
+            if s in sum2times:
+                sum2times[s] += 1
+            else:
+                sum2times[s] = 1
+
+        return cnt
