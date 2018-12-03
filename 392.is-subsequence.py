@@ -60,6 +60,7 @@ class Solution(object):
         if len(t) == 0:
             return False
         
+        '''
         idx = 0
         for c in s:
             if idx > len(t) - 1:
@@ -71,3 +72,49 @@ class Solution(object):
             idx += 1
 
         return True
+        '''
+
+        # for follow up
+
+        char2idx = {}
+
+        for i, c in enumerate(t):
+            if c not in char2idx:
+                char2idx[c] = [i]
+            else:
+                char2idx[c] += [i]
+
+        prev_pos = -1
+
+        for c in s:
+            if c not in char2idx:
+                return False
+            idx = self.bsearch(char2idx[c], prev_pos)
+            if idx != -1:
+                prev_pos = idx
+            else:
+                return False
+
+        return True
+
+    def bsearch(self, ls, prev):
+
+        # find the 1st idx in ls that is larger than prev
+
+        l = 0
+        r = len(ls)-1
+
+        while l < r:
+            m = (l+r)/2
+            if ls[m]<=prev:
+                l = m + 1
+            else:
+                r = m
+                
+        if ls[l] <= prev:
+            return -1
+        else:
+            return ls[l]
+
+        
+        
