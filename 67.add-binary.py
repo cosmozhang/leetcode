@@ -33,6 +33,7 @@ class Solution(object):
         :type b: str
         :rtype: str
         """
+        '''
         a = map(int, list(a))
         b = map(int, list(b))
         
@@ -77,5 +78,48 @@ class Solution(object):
             c.append(1)
             
         return ''.join(map(str, c[::-1]))
+
+        '''
+        a_rls = [int(c) for c in a][::-1]
+        b_rls = [int(c) for c in b][::-1]
+
+        c_rls = []
+        carry = 0
+
+        while len(a_rls) > 0 or len(b_rls) > 0:
+
+            a_num = 0
+            if len(a_rls) > 0:
+                a_num = a_rls.pop(0)
+
+            b_num = 0
+            if len(b_rls) > 0:
+                b_num = b_rls.pop(0)
+
+            s = a_num + b_num + carry
+
+            if s<2:
+                carry = 0
+                c_rls.append(s)
+            else:
+                carry = 1
+                c_rls.append(s-2)
+
+        if carry == 1:
+            c_rls.append(1)
+
+        c_ls = c_rls[::-1]
+
+        idx = 0
+        while idx < len(c_ls) and c_ls[idx] == 0:
+            idx += 1
+
+        if idx == len(c_ls):
+            c_ls = [0]
+        else:
+            c_ls = c_ls[idx:]
+
+        return ''.join(map(str, c_rls[::-1]))
+                
 
         
