@@ -93,6 +93,7 @@ class Solution(object):
 
         if (dividend < 0 and divisor > 0) or (dividend > 0 and divisor < 0):
             sign = -1
+            
         dividend = abs(dividend)
         divisor = abs(divisor)
             
