@@ -43,6 +43,8 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
+
+        '''
         if not prices:
             return 0
 
@@ -57,3 +59,14 @@ class Solution(object):
 
         return max_p
 
+        '''
+
+        max_v = 0
+        min_p = float('inf')
+
+        for p in prices:
+            min_p = min(min_p, p)
+            v = p - min_p
+            max_v = max(max_v, v)
+
+        return max_v
