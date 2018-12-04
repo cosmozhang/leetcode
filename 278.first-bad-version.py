@@ -44,6 +44,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
+        '''
         l = 0
         r = n - 1
         while l < r:
@@ -54,3 +55,17 @@ class Solution(object):
                 l = m + 1
 
         return l+1
+        '''
+
+        l = 1
+        r = n
+
+        while l < r:
+            m = (l+r) >> 1
+
+            if isBadVersion(m):
+                r = m
+            else:
+                l = m+1
+
+        return l
