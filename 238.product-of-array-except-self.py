@@ -33,6 +33,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
+        '''
         if not nums:
             return []
         if len(nums) == 1:
@@ -59,3 +60,31 @@ class Solution(object):
             ret_ls[i] = forward_ls[i-1] * backward_ls[i+1]
 
         return ret_ls
+        '''
+
+        if len(nums) == 1:
+            return 0
+
+        f_prods = []
+        b_prods = []
+
+        p = 1
+        for num in nums:
+            p *= num
+            f_prods.append(p)
+
+        p = 1
+        for num in nums[::-1]:
+            p *= num
+            b_prods.append(p)
+        b_prods = b_prods[::-1]
+
+        res_ls = [None for _ in range(len(nums))]
+        for idx in range(len(nums)):
+            if idx == 0:
+                res_ls[idx] = b_prods[1]
+            elif idx == len(nums) - 1:
+                res_ls[idx] = f_prods[-2]
+            else:
+                res_ls[idx] = f_prods[idx-1] * b_prods[idx+1]
+        return res_ls
