@@ -62,6 +62,7 @@ class Solution(object):
         return ret_ls
         '''
 
+        '''
         if len(nums) == 1:
             return 0
 
@@ -87,4 +88,31 @@ class Solution(object):
                 res_ls[idx] = f_prods[-2]
             else:
                 res_ls[idx] = f_prods[idx-1] * b_prods[idx+1]
+        return res_ls
+        '''
+        if len(nums) == 1:
+            return 0
+
+        zcnt = 0
+        p = 1
+        for num in nums:
+            if num != 0:
+                p *= num
+            else:
+                zcnt += 1
+
+        res_ls = [None for _ in range(len(nums))]
+
+        for idx in range(len(nums)):
+            if zcnt > 1:
+                res_ls[idx] = 0
+            elif zcnt == 1:
+                if nums[idx] == 0:
+                    res_ls[idx] = p
+                else:
+                    res_ls[idx] = 0
+            else:
+                res_ls[idx] = p/nums[idx]
+            
+
         return res_ls
