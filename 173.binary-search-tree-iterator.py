@@ -32,6 +32,7 @@ class BSTIterator(object):
         """
         :type root: TreeNode
         """
+        '''
         self.ls = []
         s = []
         node = root
@@ -42,6 +43,20 @@ class BSTIterator(object):
             node = s.pop(-1)
             self.ls.append(node.val)
             node = node.right
+        '''
+
+        self.ls = []
+        stack = []
+        node = root
+        while node or len(stack) > 0:
+            while node:
+                stack.append(node)
+                node = node.left
+            node = stack.pop(-1)
+                
+            self.ls.append(node.val)
+            node = node.right
+            
 
     def hasNext(self):
         """
