@@ -36,9 +36,30 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
-        
+        '''
         sorted_nums = sorted(nums, reverse=True)
         
         return sorted_nums[k-1]
+        '''
+        p = nums[0]
+        tmp = nums[1:]
+        l, r = [], []
+        while True:
+            for n in tmp:
+                if n<= p:
+                    l.append(n)
+                else:
+                    r.append(n)
+            if len(r) == k-1:
+                break
+            elif len(r) >k-1:
+                p = r[0]
+                tmp = r[1:]
+            else:
+                k = k - 1- len(r)
+                p = l[0]
+                tmp = l[1:]
+            l, r = [], []
 
+        return p
         
