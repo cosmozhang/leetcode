@@ -43,6 +43,7 @@
 #         self.right = None
 
 class Solution(object):
+    '''
     def diameterOfBinaryTree(self, root):
         """
         :type root: TreeNode
@@ -62,4 +63,30 @@ class Solution(object):
             max_d = max(ld, rd) + 1
 
             return max_d, max_l
+    '''        
+    def diameterOfBinaryTree(self, root):
+        """
+        :type root: TreeNode
+        :rtype: int
+        """
+        if not root:
+            return 0
+
+        d, m = self.helper(root)
+        return max(d, m)
+
+    def helper(self, node):
+        if not node.left and not node.right:
+            return 0, 0
+        elif node.left and not node.right:
+            dl, ml = self.helper(node.left)
+            return dl+1, ml
+        elif node.right and not node.left:
+            dr, mr = self.helper(node.right)
+            return dr+1, mr
+        else:
+            dl, ml = self.helper(node.left)
+            dr, mr = self.helper(node.right)
+
+            return max(dl, dr)+1, max(ml, mr, dl+dr+2)
             
