@@ -41,7 +41,7 @@ class Solution(object):
         :rtype: List[Interval]
         """
 
-        
+        '''
         if not intervals:
             return []
         intervals = sorted(intervals, key=lambda x:x.start)
@@ -58,4 +58,27 @@ class Solution(object):
                 end = intervals[idx].end
                 new_idx += 1
         return ret_ls
-                
+        '''
+
+
+        if len(intervals) == 0:
+            return []
+        
+        ret_ls = []
+
+        sorted_intervals = sorted(intervals, key = lambda x: x.start)
+
+        c_end = sorted_intervals[0].end
+
+        ret_ls.append(sorted_intervals[0])
+
+        for interv in sorted_intervals[1:]:
+            if interv.start > ret_ls[-1].end:
+                ret_ls.append(interv)
+            else:
+                ret_ls[-1].end = max(c_end, interv.end)
+            c_end = ret_ls[-1].end
+
+        return ret_ls
+        
+        
