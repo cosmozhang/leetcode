@@ -45,7 +45,7 @@
 # The substring with start index = 2 is "ab", which is an anagram of "ab".
 # 
 # 
-#
+# sliding window propotype
 class Solution(object):
     def findAnagrams(self, s, p):
         """
@@ -53,6 +53,8 @@ class Solution(object):
         :type p: str
         :rtype: List[int]
         """
+
+        '''
         wl = len(p)
         hash_ls = [0 for _ in range(26)]
         for c in p:
@@ -79,3 +81,53 @@ class Solution(object):
             
 
         return res_ls
+        '''
+
+        if len(s) < len(p):
+            return []
+
+        p_dic = {}
+        for c in p:
+            if c in p_dic:
+                p_dic[c] += 1
+            else:
+                p_dic[c] = 1
+
+        s_dic = {}
+        l = 0
+        r = len(p) - 1
+
+        for i in range(len(p)):
+            c = s[i]
+            if c in s_dic:
+                s_dic[c] += 1
+            elif c in p_dic:
+                s_dic[c] = 1
+                
+        ret_ls = []
+        if self.isAnagram(p_dic, s_dic):
+            ret_ls.append(0)
+        while True:
+            old_l = s[l]
+            if old_l in s_dic:
+                s_dic[old_l] -= 1
+            l += 1
+            r += 1
+            if r == len(s):
+                break
+            new_r = s[r]
+            if new_r in s_dic:
+                s_dic[new_r] += 1
+            elif new_r in p_dic:
+                s_dic[new_r] = 1
+            if self.isAnagram(p_dic, s_dic):
+                ret_ls.append(l)
+
+        return ret_ls
+
+    def isAnagram(self, p_dic, s_dic):
+
+        for k, v in p_dic.iteritems():
+            if k not in s_dic or v != s_dic[k]:
+                return False
+        return True
