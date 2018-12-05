@@ -39,7 +39,7 @@ class Solution(object):
         :type head: ListNode
         :rtype: void Do not return anything, modify head in-place instead.
         """
-
+        '''
         dummy_head = ListNode(None)
         dummy_head.next = head
         id2node_dic = {}
@@ -65,4 +65,42 @@ class Solution(object):
             node.next.next = None
         else:
             node.next = None
+        '''
+
+        if head and head.next:
+
+            l = head
+            r = head
+            while True:
+                if r.next:
+                    r = r.next
+                else:
+                    s_head = l.next
+                    l.next = None
+                    break
             
+                if r.next:
+                    r = r.next
+                else:
+                    s_head = l.next
+                    l.next = None
+                    break
+                l = l.next
+
+            old = None
+            while s_head:
+                n = s_head.next
+                s_head.next = old
+                old = s_head
+                s_head = n
+
+            s_head = old
+            node = head
+
+            while s_head:
+                n = s_head.next
+                t = node.next
+                node.next = s_head
+                node.next.next = t
+                s_head = n
+                node = t
