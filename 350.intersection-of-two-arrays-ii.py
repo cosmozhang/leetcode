@@ -53,7 +53,7 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
-        
+        '''
         nums1.sort()
         nums2.sort()
 
@@ -71,3 +71,28 @@ class Solution(object):
                 u+=1
                 v+=1
         return res_ls
+        '''
+
+        count_map = {}
+
+        if len(nums1) < len(nums2):
+            to_map = nums1
+            nums = nums2
+        else:
+            to_map = nums1
+            nums = nums2
+
+        for n in to_map:
+            if n in count_map:
+                count_map[n] += 1
+            else:
+                count_map[n] = 1
+
+        ret_ls = []
+        
+        for t in nums:
+            if t in count_map and count_map[t] > 0:
+                ret_ls.append(t)
+                count_map[t] -= 1
+
+        return ret_ls
