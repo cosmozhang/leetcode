@@ -54,6 +54,7 @@
 #         self.right = None
 
 class Solution(object):
+    '''
     def isValidBST(self, root):
         """
         :type root: TreeNode
@@ -70,12 +71,12 @@ class Solution(object):
         
         left_res = True
         if node.left:
-            if node.left.val >= node.val or node.left.val <= min_v or not self.helper(node.left, node.val, min_v):
+            if node.left.val >= node.val or node.left.val <= min_v or not self.helper(node.left, node.val, min_v): # all nodes below should be smaller than this node
                 left_res = False
         
         right_res = True
         if node.right:
-            if node.right.val <= node.val or node.right.val >= max_v or not self.helper(node.right, max_v, node.val):
+            if node.right.val <= node.val or node.right.val >= max_v or not self.helper(node.right, max_v, node.val): # all nodes below should be larger than this node
                 right_res = False
 
         if left_res and right_res:
@@ -83,3 +84,24 @@ class Solution(object):
         else:
             return False
 
+    '''
+    def isValidBST(self, root):
+        """
+        :type root: TreeNode
+        :rtype: bool
+        """
+
+        
+        return self.helper(root, float('-inf'), float('inf'))
+
+    def helper(self, node, min_v, max_v):
+        if not node:
+            return True
+
+        else:
+            if min_v < node.val and node.val < max_v:
+                
+                return self.helper(node.left, min_v, node.val) and self.helper(node.right, node.val, max_v)
+            else:
+                return False
+        
