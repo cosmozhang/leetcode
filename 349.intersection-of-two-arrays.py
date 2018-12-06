@@ -43,5 +43,24 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
-
+        '''
         return list(set(nums1) & set(nums2))
+        '''
+
+        s_nums1 = sorted(nums1)
+
+        res_set = set()
+
+        for n in nums2:
+            l, r = 0, len(nums1) - 1
+            while l <= r:
+                m = (l+r) >> 1
+                if s_nums1[m] == n:
+                    res_set.add(n)
+                    break
+                elif s_nums1[m] < n:
+                    l = m+1
+                else:
+                    r = m-1
+
+        return list(res_set)
