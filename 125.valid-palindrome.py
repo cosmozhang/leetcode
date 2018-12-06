@@ -36,8 +36,14 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+        '''
         s = s.lower()
         valid_range = range(ord('a'), ord('a')+26) + range(ord('0'), ord('0')+10)
         s = filter(lambda x: x in map(chr, valid_range), list(s))
         
+        return s == s[::-1]
+        '''
+
+        s = ''.join(filter(lambda x: ord(x) in range(ord('a'), ord('z')+1) + range(ord('0'), ord('9')+1), list(s.lower())))
+
         return s == s[::-1]
