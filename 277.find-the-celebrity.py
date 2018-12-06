@@ -48,7 +48,7 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        
+        '''
         if n == 0 or n == 1:
             return -1
 
@@ -64,3 +64,19 @@ class Solution(object):
                     return -1
 
         return candidate
+        '''
+
+        if n == 0 or n == 1:
+            return -1
+
+        cand = 0
+
+        for i in range(1, n):
+            if knows(cand, i):
+                cand = i
+
+        for i in range(0, n):
+            if i != cand:
+                if knows(cand, i) or not knows(i, cand):
+                    return -1
+        return cand
