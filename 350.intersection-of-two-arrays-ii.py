@@ -53,6 +53,7 @@ class Solution(object):
         :type nums2: List[int]
         :rtype: List[int]
         """
+        # two pointer
         '''
         nums1.sort()
         nums2.sort()
@@ -72,7 +73,8 @@ class Solution(object):
                 v+=1
         return res_ls
         '''
-
+        # hashmap
+        '''
         count_map = {}
 
         if len(nums1) < len(nums2):
@@ -96,3 +98,34 @@ class Solution(object):
                 count_map[t] -= 1
 
         return ret_ls
+        '''
+        # binary search
+        nums1.sort()
+        nums2.sort()
+
+        
+        
+        l = 0
+        r = len(nums2) - 1
+        ret_ls = []
+        for n in nums1:
+            if l >= len(nums2):
+                break
+            idx = self.bi_search(n, nums2, l, r)
+            if idx < len(nums2) and nums2[idx] == n:
+                ret_ls.append(n)
+                l = idx + 1
+
+        return ret_ls
+
+    def bi_search(self, tgt, nums, l, r):
+
+        while l < r:
+
+            m = (l+r) >> 1
+            if nums[m] < tgt:
+                l += 1
+            elif nums[m] >= tgt:
+                r = m
+
+        return l
