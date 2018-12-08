@@ -50,6 +50,8 @@ class Solution(object):
         :type rooms: List[List[int]]
         :rtype: void Do not return anything, modify rooms in-place instead.
         """
+
+        '''
         if len(rooms) < 1 or len(rooms[0]) < 1:
             return
         
@@ -72,7 +74,32 @@ class Solution(object):
                 else:
                     rooms[r][s] = rooms[i][j]+1
                     q.append((r, s))
+        '''        
+        if len(rooms) != 0 and len(rooms[0]) != 0:
+            
+            m, n = len(rooms), len(rooms[0])
+
+            for i in range(m):
+                for j in range(n):
+                    if rooms[i][j] == 0:
+                        self.helper(rooms, i, j, 0, m, n)
+
+
+    def helper(self, rooms, i, j, dis, m, n):
+
+        dirs = [(0,1), (0,-1), (1,0), (-1,0)]
+
+        for pi, pj in dirs:
+            new_i = i + pi
+            new_j = j + pj
+
+            if new_i > -1 and new_i < m and new_j > -1 and new_j < n and rooms[new_i][new_j] != 0 and rooms[new_i][new_j] != -1 and rooms[new_i][new_j] != 'X':
+                rooms[new_i][new_j] = min(dis+1, rooms[new_i][new_j])
+                tmp = rooms[new_i][new_j]
+                rooms[new_i][new_j] = 'X'
+                self.helper(rooms, new_i, new_j, dis+1, m, n)
+                rooms[new_i][new_j] = tmp
                 
 
-
+        
                 
