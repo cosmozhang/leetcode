@@ -50,6 +50,7 @@ class Solution(object):
         :type n: int
         :rtype: float
         """
+        '''
         if n == 0:
             return 1
         elif n == 1:
@@ -63,3 +64,27 @@ class Solution(object):
                     return halfx*halfx
                 else:
                     return halfx*halfx*x
+        '''
+
+        if x == 0:
+            return 0
+
+        if n == 0:
+            return 1 
+        elif n == 1:
+            return x
+        elif n > 0:
+            h = self.myPow(x, n/2)
+            if n%2 == 0:
+                ret = h*h
+            else:
+                ret = h*h*x
+            return ret
+        else:
+            n = -n
+            h = self.myPow(x, n/2)
+            if n%2 == 0:
+                ret = h*h
+            else:
+                ret = h*h*x
+            return 1/ret
