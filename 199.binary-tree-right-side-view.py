@@ -39,6 +39,8 @@ class Solution(object):
         :type root: TreeNode
         :rtype: List[int]
         """
+
+        '''
         if not root:
             return []
         row_ls = []
@@ -55,4 +57,24 @@ class Solution(object):
             row_ls += [row_res]
             s = new_s
         ret_ls = [row[-1] for row in row_ls]
+        return ret_ls
+        '''
+
+        if not root:
+            return []
+
+        q = [root]
+
+        ret_ls = []
+
+        while q:
+            ret_ls.append(q[-1].val)
+            new_q = []
+            for node in q:
+                if node.left:
+                    new_q.append(node.left)
+                if node.right:
+                    new_q.append(node.right)
+            q = new_q
+
         return ret_ls
