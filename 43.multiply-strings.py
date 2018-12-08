@@ -44,6 +44,7 @@ class Solution(object):
         :type num2: str
         :rtype: str
         """
+        '''
         rev_nums2 = num2[::-1]
         rev_nums1 = num1[::-1]
         s = 0
@@ -53,5 +54,19 @@ class Solution(object):
                 temp += int(rev_nums2[i]) * int(rev_nums1[j]) * (10**j)
             s += temp * (10**i)
         return str(s)
-                
+        '''
+
+
+        r_num1 = [int(n) for n in num1][::-1]
+        r_num2 = [int(n) for n in num2][::-1]
+
+        p = 0
+        for i in range(len(r_num1)):
+            tmp = 0
+            for j in range(len(r_num2)):
+                tmp += r_num1[i] * r_num2[j] * 10**j
+            p += tmp * 10**i
+
+        return str(p)
             
+        
