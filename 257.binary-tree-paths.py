@@ -37,11 +37,14 @@
 #         self.right = None
 
 class Solution(object):
+
+    '''
     def binaryTreePaths(self, root):
         """
         :type root: TreeNode
         :rtype: List[str]
         """
+
         paths = self.helper(root)
 
         str_ret = []
@@ -68,3 +71,37 @@ class Solution(object):
                 for ls in right_ret:
                     res_ls.append([node.val] + ls)
             return res_ls
+    '''
+
+    def binaryTreePaths(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[str]
+        """
+
+        if not root:
+            return []
+
+        ret_ls = self.helper(root)
+
+        return ret_ls
+
+    def helper(self, node):
+
+        tmp_ls = []
+        if not node.left and not node.right:
+            return [str(node.val)]
+        elif node.left and not node.right:
+            for s in self.helper(node.left):
+                tmp_ls.append(str(node.val)+'->'+s)
+            return tmp_ls
+        elif node.right and not node.left:
+            for s in self.helper(node.right):
+                tmp_ls.append(str(node.val)+'->'+s)
+            return tmp_ls
+        else:
+            for s in self.helper(node.left):
+                tmp_ls.append(str(node.val)+'->'+s)
+            for s in self.helper(node.right):
+                tmp_ls.append(str(node.val)+'->'+s)
+            return tmp_ls
