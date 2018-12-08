@@ -58,7 +58,7 @@ class Solution(object):
 
         '''
 
-        idx = len(nums1) - 1
+        idx = m+n-1
 
         l = m - 1
         r = n - 1
