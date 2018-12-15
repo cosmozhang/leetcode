@@ -41,7 +41,7 @@
 # T has length at most 200.
 # S and T consist of lowercase letters only.
 # 
-# 
+# need to care the situation when the char is not in the hashmap
 #
 class Solution(object):
     def customSortString(self, S, T):
