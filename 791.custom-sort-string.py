@@ -50,7 +50,7 @@ class Solution(object):
         :type T: str
         :rtype: str
         """
-        
+        '''
         s_dic = {}
         for i, c in enumerate(S):
             s_dic[c]=i
@@ -59,4 +59,14 @@ class Solution(object):
             return s_dic.get(c1, 0) - s_dic.get(c2, 0)
 
         return ''.join(sorted(list(T), cmp=cus_cmp))
-            
+        '''
+
+        c2p = {}
+
+        for idx, c in enumerate(S):
+            c2p[c] = idx
+
+        def cuscomp(x, y):
+            return c2p.get(x, 0) - c2p.get(y, 0)
+
+        return ''.join(sorted(list(T), cmp=cuscomp))
