@@ -66,7 +66,11 @@ class Solution(object):
         for idx, c in enumerate(S):
             c2p[c] = idx+1
 
+        for c in T:
+            if c not in c2p:
+                c2p[c] = 0
+
         def cuscomp(x, y):
-            return c2p.get(x, 0) - c2p.get(y, 0)
+            return c2p[x] - c2p[y]
 
         return ''.join(sorted(list(T), cmp=cuscomp))
