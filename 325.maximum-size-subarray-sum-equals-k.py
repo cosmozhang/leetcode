@@ -42,6 +42,7 @@ class Solution(object):
         :type k: int
         :rtype: int
         """
+        '''
         ret = 0
         s = 0
         idx_dic = {0:-1}
@@ -54,4 +55,20 @@ class Solution(object):
             if s - k in idx_dic:
                 ret = max(ret, idx-idx_dic[s-k])
         return ret
+        '''
+
+        s = 0
+        max_l = 0
+        idx_dic = {0:-1}
+
+        for idx, num in enumerate(nums):
+            s += num
+            t = s - k
+            if t in idx_dic:
+                max_l = max(max_l, idx - idx_dic[t])
+            if s not in idx_dic:
+                idx_dic[s] = idx
+
+        return max_l
             
+        
