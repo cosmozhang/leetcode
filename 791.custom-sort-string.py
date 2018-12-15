@@ -67,6 +67,6 @@ class Solution(object):
             c2p[c] = idx
 
         def cuscomp(x, y):
-            return c2p.get(x, 0) - c2p.get(y, 0)
+            return c2p.get(x, len(S)) - c2p.get(y, len(S))
 
         return ''.join(sorted(list(T), cmp=cuscomp))
