@@ -35,9 +35,27 @@ class Solution(object):
         :rtype: List[int]
         """
         
-        
+        '''
         for i in range(len(nums)):
             for j in range(i+1, len(nums)):
                 s = nums[i] + nums[j]
                 if s == target:
                     return [i, j]
+        '''
+        n2p = {}
+        for idx, n in enumerate(nums):
+            if n not in n2p:
+                n2p[n] = [idx]
+            else:
+                n2p[n].append(idx)
+                
+        for k, poss in n2p.iteritems():
+            s = target - k
+            if s !=k:
+                if s in n2p:
+                    return [poss[0], n2p[s][0]]
+            elif s == k:
+                if len(poss) > 1:
+                    return [poss[0], poss[1]]
+
+        return []
