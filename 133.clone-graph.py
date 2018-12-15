@@ -64,6 +64,7 @@ class Solution:
     # @param node, a undirected graph node
     # @return a undirected graph node
     def cloneGraph(self, node):
+        '''
         if not node:
             return None
         
@@ -82,3 +83,26 @@ class Solution:
 
         
         return head
+        '''
+        if not node:
+            return None
+        
+        q = [node]
+        new_node = UndirectedGraphNode(node.label)
+        dq = [new_node]
+        visited = set()
+        while len(q) > 0:
+            new_q, new_dq = [], []
+            for n, nn in zip(q, dq):
+                if n not in visited:
+                    for nei in n.neighbors:
+                        t = UndirectedGraphNode(nei.label)
+                        nn.neighbors.append(t)
+                        new_q.append(nei)
+                        new_dq.append(t)
+                    visited.add(n)
+            q, dq = new_q, new_dq
+
+        return new_node
+                
+    
