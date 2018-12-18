@@ -46,14 +46,38 @@ class Solution(object):
         :type grid: List[List[int]]
         :rtype: int
         """
-        
+        '''
         m, n = len(grid), len(grid[0])
 
         for i in range(m):
             for j in range(n):
                 if grid[i][j] == 1:
                     return self.helper(grid, m, n, i, j)
+        '''
 
+
+        m, n = len(grid), len(grid[0])
+        if m == 0 or n == 0:
+            return 0
+        
+        s = 0
+        for i in range(m):
+            for j in range(n):
+                if grid[i][j] == 1:
+                    s += self.cal_tile_pre(i, j, grid, m, n)
+        return s
+
+    def cal_tile_pre(self, i, j, grid, m, n):
+        dirs = [(0,1), (1, 0), (0,-1), (-1,0)]
+        ts = 0
+        for xp, yp in dirs:
+            ni, nj = i+xp, j+yp
+            if ni > m-1 or ni < 0 or nj > n-1 or nj < 0 or grid[ni][nj] == 0:
+              ts += 1
+        return ts
+        
+        
+    '''
     def helper(self, grid, m, n, i, j):
 
         if i < 0 or i >= m or j < 0 or j >= n or grid[i][j] == 0:
@@ -69,3 +93,4 @@ class Solution(object):
             c += self.helper(grid, m, n, i, j-1)
 
             return c
+    '''
