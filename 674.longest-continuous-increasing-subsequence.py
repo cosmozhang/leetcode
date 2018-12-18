@@ -44,6 +44,8 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
+
+        '''
         if len(nums) < 1:
             return 0
         if len(nums) == 1:
@@ -58,3 +60,20 @@ class Solution(object):
                     dp[i] = dp[i-1]+1
 
         return max(dp)
+        '''
+
+        if len(nums) == 0:
+            return 0
+        elif len(nums) == 1:
+            return 1
+        else:
+            l, r = 0, 0
+            max_l = 1
+            while r < len(nums)-1:
+                if nums[r] < nums[r+1]:
+                    r = r+1
+                    max_l = max(max_l, r-l+1)
+                else:
+                    r += 1
+                    l = r
+            return max_l
