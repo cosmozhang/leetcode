@@ -62,6 +62,7 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
+        '''
         if not s:
             return True
         pair_dic = {')':'(', ']':'[', '}':'{'}
@@ -82,9 +83,27 @@ class Solution(object):
             return False
         else:
             return True
+        '''
 
-'''
-if __name__ == '__main__':
-    s = Solution()
-    print s.isValid('(]')
-'''
+        p2dic = {')':'(', ']':'[', '}': '{'}
+
+        if len(s) == 0:
+            return True
+
+        s_ls = list(s)
+        stack = []
+        while len(s_ls)>0:
+            p = s_ls.pop(0)
+            if len(stack) > 0:
+                if p in p2dic and p2dic[p] == stack[-1]:
+                    stack.pop(-1)
+                else:
+                    stack.append(p)
+            else:
+                stack.append(p)
+        if len(stack) == 0 and len(s_ls) == 0:
+            return True
+        else:
+            return False
+
+        
