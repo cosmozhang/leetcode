@@ -36,6 +36,8 @@ class Solution(object):
         :type target: int
         :rtype: List[int]
         """
+
+        '''
         if len(nums)<1:
             return [-1,-1]
         if target > nums[-1] or target < nums[0]:
@@ -66,5 +68,43 @@ class Solution(object):
         if nums[left_pos] != target:
             left_pos, right_pos =-1, -1
         return [left_pos, right_pos]
-                
-                
+        '''
+
+        s, e = -1, -1
+
+        l, r = 0, len(nums)-1
+
+        while l < r:
+            m = (l+r) >> 1
+            if nums[m] > target:
+                r = m-1
+            elif nums[m] < target:
+                l = m+1
+            else:
+                r = m
+        if len(nums) > 0 and nums[r] == target:
+            s = r
+
+        l, r = 0, len(nums)-1
+        while l < r:
+            m = (l+r) >> 1
+            if nums[m] > target:
+                r = m-1
+            elif nums[m] < target:
+                l = m+1
+            else:
+                if l + 1 != r:
+                    l = m
+                else:
+                    if target == nums[l+1]:
+                        l+=1
+                        break
+                    else:
+                        break
+        if len(nums) >0 and nums[l] == target:
+            e = l
+
+        return [s, e]
+                    
+                    
+        
