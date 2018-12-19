@@ -10,21 +10,21 @@
 # Testcase Example:  '"11"\n"1"'
 #
 # Given two binary strings, return their sum (also a binary string).
-# 
+#
 # The input strings are both non-empty and contains only characters 1 or 0.
-# 
+#
 # Example 1:
-# 
-# 
+#
+#
 # Input: a = "11", b = "1"
 # Output: "100"
-# 
+#
 # Example 2:
-# 
-# 
+#
+#
 # Input: a = "1010", b = "1011"
 # Output: "10101"
-# 
+#
 #
 class Solution(object):
     def addBinary(self, a, b):
@@ -36,7 +36,7 @@ class Solution(object):
         '''
         a = map(int, list(a))
         b = map(int, list(b))
-        
+
         c = []
 
         la, lb = len(a), len(b)
@@ -76,7 +76,7 @@ class Solution(object):
             i += 1
         if cache == 1:
             c.append(1)
-            
+
         return ''.join(map(str, c[::-1]))
 
         '''
@@ -108,18 +108,7 @@ class Solution(object):
         if carry == 1:
             c_rls.append(1)
 
-        c_ls = c_rls[::-1]
-
-        idx = 0
-        while idx < len(c_ls) and c_ls[idx] == 0:
-            idx += 1
-
-        if idx == len(c_ls):
-            c_ls = [0]
-        else:
-            c_ls = c_ls[idx:]
-
         return ''.join(map(str, c_rls[::-1]))
-                
 
-        
+
+
