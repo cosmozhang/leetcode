@@ -56,7 +56,7 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        
+        '''
         if len(s) == 0:
             return True
 
@@ -85,5 +85,32 @@ class Solution(object):
             else:
                 return False
         return True
-                    
-                
+        '''
+
+        if len(s) == 0:
+            return True
+
+        s_stack = []
+        p_stack = []
+        for idx, c in enumerate(s):
+            if c == '(':
+                p_stack.append(idx)
+            elif c == '*':
+                s_stack.append(idx)
+            else:
+                if len(p_stack) > 0:
+                    p_stack.pop(-1)
+                elif len(s_stack) > 0:
+                    s_stack.pop(-1)
+                else:
+                    return False
+        while len(p_stack) > 0:
+            if len(s_stack) == 0:
+                return False
+            elif len(s_stack) > 0 and p_stack[-1] < s_stack[-1]:
+                s_stack.pop(-1)
+                p_stack.pop(-1)
+            else:
+                return False
+        return True
+        
