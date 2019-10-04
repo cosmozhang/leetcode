@@ -1,12 +1,14 @@
 #
+# @lc app=leetcode id=238 lang=python
+#
 # [238] Product of Array Except Self
 #
 # https://leetcode.com/problems/product-of-array-except-self/description/
 #
 # algorithms
-# Medium (51.97%)
-# Total Accepted:    189.1K
-# Total Submissions: 362.8K
+# Medium (56.81%)
+# Total Accepted:    314.6K
+# Total Submissions: 553.8K
 # Testcase Example:  '[1,2,3,4]'
 #
 # Given an array nums of n integers where n > 1,  return an array output such
@@ -33,86 +35,40 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
-        '''
-        if not nums:
-            return []
-        if len(nums) == 1:
-            return [0]
+
+        """
+        fw = [nums[0]] * len(nums)
+        for i in range(1, len(nums)):
+            fw[i] = fw[i-1] * nums[i]
         
-        forward_ls = []
-        backward_ls = []
+        bw = [nums[-1]] * len(nums)
+        for j in range(len(nums)-2, -1, -1):
+            bw[j] = bw[j+1] * nums[j]
 
-        prod_f = 1
-        for num in nums:
-            prod_f = prod_f*num
-            forward_ls += [prod_f]
-
-        prod_b = 1
-        for num in nums[::-1]:
-            prod_b = prod_b*num
-            backward_ls += [prod_b]
-        backward_ls = backward_ls[::-1]
-
-        ret_ls = [None] * len(nums)
-        ret_ls[0] = backward_ls[1]
-        ret_ls[-1] = forward_ls[-2]
-        for i in range(1, len(nums)-1):
-            ret_ls[i] = forward_ls[i-1] * backward_ls[i+1]
-
-        return ret_ls
-        '''
-
-        '''
-        if len(nums) == 1:
-            return 0
-
-        f_prods = []
-        b_prods = []
-
-        p = 1
-        for num in nums:
-            p *= num
-            f_prods.append(p)
-
-        p = 1
-        for num in nums[::-1]:
-            p *= num
-            b_prods.append(p)
-        b_prods = b_prods[::-1]
-
-        res_ls = [None for _ in range(len(nums))]
-        for idx in range(len(nums)):
-            if idx == 0:
-                res_ls[idx] = b_prods[1]
-            elif idx == len(nums) - 1:
-                res_ls[idx] = f_prods[-2]
+        ret = [0] * len(nums)
+        for i in range(len(nums)):
+            if i == 0:
+                ret[i] = bw[i+1]
+            elif i == len(nums)-1:
+                ret[i] = fw[i-1]
             else:
-                res_ls[idx] = f_prods[idx-1] * b_prods[idx+1]
-        return res_ls
-        '''
-        if len(nums) == 1:
-            return 0
+                ret[i] = bw[i+1] * fw[i-1]
 
-        zcnt = 0
-        p = 1
-        for num in nums:
-            if num != 0:
-                p *= num
+        return ret
+        """
+
+        ret = [nums[0]] * len(nums)
+        for i in range(1, len(nums)):
+            ret[i] = ret[i-1] * nums[i]
+
+        r = 1
+
+        for i in range(len(nums)-1, -1, -1):
+            if i == 0:
+                ret[i] = r
             else:
-                zcnt += 1
-
-        res_ls = [None for _ in range(len(nums))]
-
-        for idx in range(len(nums)):
-            if zcnt > 1:
-                res_ls[idx] = 0
-            elif zcnt == 1:
-                if nums[idx] == 0:
-                    res_ls[idx] = p
-                else:
-                    res_ls[idx] = 0
-            else:
-                res_ls[idx] = p/nums[idx]
+                ret[i] = ret[i-1] * r
+                r *= nums[i]
+        return ret
             
-
-        return res_ls
+        
